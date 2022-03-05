@@ -2,7 +2,8 @@
   "name": "@start-packages/utils-base",
   "version": "0.0.1",
   "description": "## Try it",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/EvgenyiFedotov/start-packages#readme",
   "devDependencies": {
     "@start-packages/eslint-typescript": "git+https://github.com/EvgenyiFedotov/start-packages.git#eslint/typescript",
-    "@start-packages/webpack-typescript-node": "git+https://github.com/EvgenyiFedotov/start-packages.git#webpack/typescript-node"
+    "@start-packages/webpack-typescript-node": "git+https://github.com/EvgenyiFedotov/start-packages.git#webpack/typescript-node",
+    "ts-loader": "^9.2.7"
   }
 }
