@@ -3,8 +3,12 @@ const NodeExternals = require("webpack-node-externals");
 
 const cwd = process.cwd();
 
-module.exports = () => ({
+module.exports = (env) => ({
+  mode: env.mode || "production",
   target: "node",
+  entry: {
+    index: path.resolve(cwd, "./src/index"),
+  },
   module: {
     rules: [
       {
@@ -24,4 +28,11 @@ module.exports = () => ({
     modules: [path.resolve(cwd, "./src"), path.resolve(cwd, "./node_modules")],
   },
   externals: [NodeExternals()],
+  output: {
+    filename: "[name].js",
+    path: path.resolve(cwd, "./dist"),
+  },
+  watchOptions: {
+    aggregateTimeout: 100,
+  },
 });
