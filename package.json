@@ -1,0 +1,19 @@
+{
+  "name": "@start-packages/structure-base-typescript",
+  "version": "0.0.1",
+  "description": "## @start-packages/eslint-typescript",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node ./scripts/postinstall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvgenyiFedotov/start-packages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvgenyiFedotov/start-packages/issues"
+  },
+  "homepage": "https://github.com/EvgenyiFedotov/start-packages#readme"
+}
