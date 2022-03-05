@@ -1,0 +1,25 @@
+{
+  "name": "@start-packages/utils-base",
+  "version": "0.0.1",
+  "description": "## Try it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack --watch --progress --env mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvgenyiFedotov/start-packages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvgenyiFedotov/start-packages/issues"
+  },
+  "homepage": "https://github.com/EvgenyiFedotov/start-packages#readme",
+  "devDependencies": {
+    "@start-packages/eslint-typescript": "git+https://github.com/EvgenyiFedotov/start-packages.git#eslint/typescript",
+    "@start-packages/webpack-typescript-node": "git+https://github.com/EvgenyiFedotov/start-packages.git#webpack/typescript-node"
+  }
+}
