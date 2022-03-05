@@ -6,5 +6,5 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   plugins: ["@typescript-eslint"],
-  ignorePatterns: ["webpack.*"],
+  ignorePatterns: ["webpack.*", ".eslintrc*"],
 };
