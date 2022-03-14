@@ -4,7 +4,7 @@ const { readFile } = require("fs/promises");
 const spawn = require("./spawn");
 
 async function unwrapPackage({
-  fromDir = __dirname,
+  fromDir = resolve(__dirname, ".."),
   toDir = process.env.INIT_CWD,
 } = {}) {
   const fromPackageJsonFile = resolve(fromDir, "./package.json");
