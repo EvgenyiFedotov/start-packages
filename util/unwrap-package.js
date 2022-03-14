@@ -16,6 +16,7 @@ async function unwrapPackage({
   moveDependencies(fromJson, toJson, "devDependencies");
 
   await writeJson(toPackageJsonFile, toJson);
+  console.log("> npm install");
   await spawn("npm", ["install"], { cwd: toDir, onCreate: spawn.pipe });
 
   // const mainDeps = buildDependencies(fromJson.dependencies);
