@@ -16,6 +16,7 @@ async function unwrapPackage({
   moveDependencies(fromJson, toJson, "devDependencies");
 
   await writeJson(toPackageJsonFile, toJson);
+  await spawn("npm", ["install"]);
 
   // const mainDeps = buildDependencies(fromJson.dependencies);
   // const devDeps = buildDependencies(fromJson.devDependencies);
@@ -35,7 +36,10 @@ async function readJson(path) {
 
 function moveDependencies(fromJson, toJson, key) {
   if (fromJson[key]) {
-    toJson[key] = sortDependencies({ ...(toJson[key] || {}), ...fromJson[key] });
+    toJson[key] = sortDependencies({
+      ...(toJson[key] || {}),
+      ...fromJson[key],
+    });
   }
 
   return toJson[key];
@@ -45,8 +49,8 @@ function sortDependencies(dependencies) {
   const entries = Object.entries(dependencies).sort(([a], [b]) => {
     var textA = a.toUpperCase();
     var textB = b.toUpperCase();
-  
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+
+    return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
 
   return Object.fromEntries(entries);
