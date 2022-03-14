@@ -8,8 +8,14 @@ async function spawn(command, args, { onCreate, ...options } = {}) {
 
     if (onCreate) onCreate(childProcess);
 
-    childProcess.stdout.on("data", (data) => stdout.push(data));
-    childProcess.stderr.on("data", (data) => stderr.push(data));
+    childProcess.stdout.on("data", (data) => {
+      console.log(data.toString());
+      stdout.push(data);
+    });
+    childProcess.stderr.on("data", (data) => {
+      console.log(data.toString());
+      stderr.push(data);
+    });
     childProcess.on("close", (code) => resolve({ code, stdout, stderr }));
   });
 }
