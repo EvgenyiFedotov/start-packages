@@ -16,5 +16,5 @@ const unwrapPackage = require("../util/unwrap-package");
     );
   }
 
-  // await unwrapPackage();
+  await unwrapPackage();
 })();
