@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": ".eslintrc.js",
-  "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EvgenyiFedotov/start-packages.git"
