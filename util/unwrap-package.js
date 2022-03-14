@@ -12,6 +12,12 @@ async function unwrapPackage({
   const mainDeps = buildDependencies(fromJson.dependencies);
   const devDeps = buildDependencies(fromJson.devDependencies);
 
+  console.log(">", fromDir);
+  console.log(">", toDir);
+  console.log(">", fromJson.name);
+  console.log(">", mainDeps);
+  console.log(">", devDeps)
+
   await installDependencies("--save", mainDeps, toDir);
   await installDependencies("--save-dev", devDeps, toDir);
   await uninstallCurrentPackage(fromJson.name, toDir);
