@@ -12,18 +12,8 @@ async function unwrapPackage({
   const mainDeps = buildDependencies(fromJson.dependencies);
   const devDeps = buildDependencies(fromJson.devDependencies);
 
-  console.log(">", fromDir);
-  console.log(">", toDir);
-  console.log(">", fromPackageJsonFile);
-  console.log()
-  console.log(">", fromJson.name);
-  console.log(">", mainDeps);
-  console.log(">", devDeps)
-
-  // await installDependencies("--save", mainDeps, toDir);
-  // console.log("> Installed main dependencies");
-  // await installDependencies("--save-dev", devDeps, toDir);
-  // console.log("> Installed dev dependencies");
+  await installDependencies("--save", mainDeps, toDir);
+  await installDependencies("--save-dev", devDeps, toDir);
 }
 
 async function readJson(path) {
