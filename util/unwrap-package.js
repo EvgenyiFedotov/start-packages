@@ -1,5 +1,5 @@
 const { resolve } = require("path");
-const { readFile } = require("fs/promises");
+const { readFile, writeFile } = require("fs/promises");
 
 const spawn = require("./spawn");
 
@@ -14,6 +14,8 @@ async function unwrapPackage({
 
   moveDependencies(fromJson, toJson, "dependencies");
   moveDependencies(fromJson, toJson, "devDependencies");
+
+  await writeJson(toPackageJsonFile, toJson);
 
   // const mainDeps = buildDependencies(fromJson.dependencies);
   // const devDeps = buildDependencies(fromJson.devDependencies);
@@ -33,9 +35,28 @@ async function readJson(path) {
 
 function moveDependencies(fromJson, toJson, key) {
   if (fromJson[key]) {
-    if (!toJson[key]) toJson[key] = {};
+    toJson[key] = sortDependencies({ ...(toJson[key] || {}), ...fromJson[key] });
+  }
 
-    toJson[key] = { ...toJson[key], ...fromJson[key] };
+  return toJson[key];
+}
+
+function sortDependencies(dependencies) {
+  const entries = Object.entries(dependencies).sort(([a], [b]) => {
+    var textA = a.toUpperCase();
+    var textB = b.toUpperCase();
+  
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+
+  return Object.fromEntries(entries);
+}
+
+async function writeJson(path, data) {
+  try {
+    await writeFile(path, JSON.stringify(data, null, 2));
+  } catch {
+    // pass
   }
 }
 
