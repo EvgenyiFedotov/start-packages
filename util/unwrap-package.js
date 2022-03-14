@@ -8,12 +8,18 @@ async function unwrapPackage({
   toDir = process.env.INIT_CWD,
 } = {}) {
   const fromPackageJsonFile = resolve(fromDir, "./package.json");
+  const toPackageJsonFile = resolve(toDir, "./package.json");
   const fromJson = await readJson(fromPackageJsonFile);
-  const mainDeps = buildDependencies(fromJson.dependencies);
-  const devDeps = buildDependencies(fromJson.devDependencies);
+  const toJson = await readJson(toPackageJsonFile);
 
-  await installDependencies("--save", mainDeps, toDir);
-  await installDependencies("--save-dev", devDeps, toDir);
+  moveDependencies(fromJson, toJson, "dependencies");
+  moveDependencies(fromJson, toJson, "devDependencies");
+
+  // const mainDeps = buildDependencies(fromJson.dependencies);
+  // const devDeps = buildDependencies(fromJson.devDependencies);
+
+  // await installDependencies("--save", mainDeps, toDir);
+  // await installDependencies("--save-dev", devDeps, toDir);
 }
 
 async function readJson(path) {
@@ -25,19 +31,27 @@ async function readJson(path) {
   }
 }
 
-function buildDependencies(dependencies) {
-  const packages = [];
+function moveDependencies(fromJson, toJson, key) {
+  if (fromJson[key]) {
+    if (!toJson[key]) toJson[key] = {};
 
-  for (const key in dependencies) {
-    packages.push(`${key}@${dependencies[key]}`);
+    toJson[key] = { ...toJson[key], ...fromJson[key] };
   }
-
-  return packages;
 }
 
-async function installDependencies(flag, dependencies, cwd) {
-  const args = ["install", flag, ...dependencies];
-  return await spawn("npm", args, { cwd, onCreate: spawn.pipe });
-}
+// function buildDependencies(dependencies) {
+//   const packages = [];
+
+//   for (const key in dependencies) {
+//     packages.push(`${key}@${dependencies[key]}`);
+//   }
+
+//   return packages;
+// }
+
+// async function installDependencies(flag, dependencies, cwd) {
+//   const args = ["install", flag, ...dependencies];
+//   return await spawn("npm", args, { cwd, onCreate: spawn.pipe });
+// }
 
 module.exports = unwrapPackage;
