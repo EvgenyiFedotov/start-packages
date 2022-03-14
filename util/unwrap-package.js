@@ -20,12 +20,10 @@ async function unwrapPackage({
   console.log(">", mainDeps);
   console.log(">", devDeps)
 
-  await installDependencies("--save", mainDeps, toDir);
-  console.log("> Installed main dependencies");
-  await installDependencies("--save-dev", devDeps, toDir);
-  console.log("> Installed dev dependencies");
-  await uninstallCurrentPackage(fromJson.name, toDir);
-  console.log("> Uninstall current package");
+  // await installDependencies("--save", mainDeps, toDir);
+  // console.log("> Installed main dependencies");
+  // await installDependencies("--save-dev", devDeps, toDir);
+  // console.log("> Installed dev dependencies");
 }
 
 async function readJson(path) {
@@ -50,13 +48,6 @@ function buildDependencies(dependencies) {
 async function installDependencies(flag, dependencies, cwd) {
   const args = ["install", flag, ...dependencies];
   return await spawn("npm", args, { cwd, onCreate: spawn.pipe });
-}
-
-async function uninstallCurrentPackage(packageName, cwd) {
-  return await spawn("npm", ["uninstall", packageName], {
-    cwd,
-    onCreate: spawn.pipe,
-  });
 }
 
 module.exports = unwrapPackage;
