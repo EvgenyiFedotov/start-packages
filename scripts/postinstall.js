@@ -1,7 +1,7 @@
 const fsp = require("fs/promises");
 const path = require("path");
 
-// const unwrapPackage = require("../util/unwrap-package");
+const unwrapPackage = require("../util/unwrap-package");
 
 (async () => {
   const cwd = process.env.INIT_CWD || process.cwd();
